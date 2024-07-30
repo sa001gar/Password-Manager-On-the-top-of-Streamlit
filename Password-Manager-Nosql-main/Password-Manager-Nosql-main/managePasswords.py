@@ -7,6 +7,13 @@ import urllib
 import string
 from datetime import datetime
 
+
+# Set page configuration
+st.set_page_config(
+    page_title="Password Manager",  # Update with your desired page title
+    page_icon="🔒",  # Update with your desired emoji or path to an icon file
+)
+
 # Load MongoDB credentials from secrets.toml
 username = urllib.parse.quote_plus(st.secrets["mongodb"]["username"])
 password = urllib.parse.quote_plus(st.secrets["mongodb"]["password"])
@@ -103,7 +110,6 @@ class PasswordManager:
 # Main function: Entry point of the program
 def main():
     user_manager = UserManager()
-    st.set_page_config(page_title="Password Manager", page_icon="🔐")
     # Welcome page with image
     st.title("Welcome to the Password Manager")
     st.image("myimage.jpeg", width=150)  # Update this to the path of your image
