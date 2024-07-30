@@ -7,22 +7,28 @@ import urllib
 import string
 from datetime import datetime
 
-# Set page configuration
-st.set_page_config(
-    page_title="Password Manager",  # Update with your desired page title
-    page_icon="🔒",  # Update with your desired emoji or path to an icon file
-)
+#error
 
-# Load MongoDB credentials from secrets.toml
-username = urllib.parse.quote_plus(st.secrets["mongodb"]["username"])
-password = urllib.parse.quote_plus(st.secrets["mongodb"]["password"])
-cluster = st.secrets["mongodb"]["cluster"]
-dbname = st.secrets["mongodb"]["dbname"]
+# # Load MongoDB credentials from secrets.toml
+# username = urllib.parse.quote_plus()
+# password = urllib.parse.quote_plus(st.secrets["mongodb"]["password"])
+# cluster = st.secrets["mongodb"]["cluster"]
+# dbname = st.secrets["mongodb"]["dbname"]
+
+# # MongoDB setup
+# uri = f"mongodb+srv://{username}:{password}@{cluster}/{dbname}?retryWrites=true&w=majority"
+# client = MongoClient(uri, server_api=ServerApi('1'))
+# db = client[dbname]  # Use the dbname from secrets.toml
+
+# Properly format and encode the URI
+username = urllib.parse.quote_plus("kundusagar233")
+password = urllib.parse.quote_plus("q2@4GdIFqxTkGzL")
+cluster = "sagar.br2ms9r.mongodb.net"
+uri = f"mongodb+srv://{username}:{password}@{cluster}/?retryWrites=true&w=majority&appName=SAGAR"
 
 # MongoDB setup
-uri = f"mongodb+srv://{username}:{password}@{cluster}/{dbname}?retryWrites=true&w=majority"
-client = MongoClient(uri, server_api=ServerApi('1'))
-db = client[dbname]  # Use the dbname from secrets.toml
+client = MongoClient(uri)
+db = client.password_manager_db
 
 # UserManager Class: Manages user-related operations
 class UserManager:
@@ -135,7 +141,6 @@ def main():
                     if "successfully" in message:
                         st.session_state.logged_in = True
                         st.session_state.username = username
-                        st.experimental_rerun()
                 else:
                     st.error("Please provide both username and password")
 
@@ -148,7 +153,6 @@ def main():
                     st.success("Authentication successful")
                     st.session_state.logged_in = True
                     st.session_state.username = username
-                    st.experimental_rerun()
                 else:
                     st.error("Authentication failed")
 
@@ -205,7 +209,6 @@ def main():
             st.session_state.logged_in = False
             st.session_state.username = None
             st.success("Logged out successfully")
-            st.experimental_rerun()
 
         if st.sidebar.button("Delete User"):
             st.subheader("Delete User")
@@ -217,7 +220,6 @@ def main():
                     st.success(message)
                     st.session_state.logged_in = False
                     st.session_state.username = None
-                    st.experimental_rerun()
                 else:
                     st.error(message)
 
