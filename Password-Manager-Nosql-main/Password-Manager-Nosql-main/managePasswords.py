@@ -103,7 +103,7 @@ class PasswordManager:
 # Main function: Entry point of the program
 def main():
     user_manager = UserManager()
-
+    st.set_page_config(page_title="Password Manager", page_icon="🔐")
     # Welcome page with image
     st.title("Welcome to the Password Manager")
     st.image("myimage.jpeg", width=150)  # Update this to the path of your image
