@@ -36,7 +36,7 @@ To run the password manager:
 3. **Run the script:**
 
     ```python
-    python main.py
+    streamlit run main.py
 - **Explanation:** Run the main Python script to start the password manager application.
 
 ## Conclusion 🎉
